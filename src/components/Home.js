@@ -47,9 +47,10 @@ export default function Home() {
     validateData(updateFish);
   };
 
-  const handleChangeSize = (event) => {
-    setNewFish((fish) => ({ ...fish, size: event.target.value }));
-  };
+  //   const handleChangeSize = (event) => {
+  //     setNewFish((newFish) => ({ ...newFish, size: event.target.value }));
+  //     validateData(newFish);
+  //   };
 
   const handleAdd = () => {
     setListOfFish((listOfFish) => {
@@ -71,8 +72,10 @@ export default function Home() {
   };
 
   const [valid, setValid] = useState(false);
+
   const validateData = (fish) => {
-    if (fish.name === "" || fish.name.trim().length === 0) {
+    //console.log(fish);
+    if (fish.name === "" || fish.name.trim().length === 0 || fish.size === "") {
       return setValid(false);
     }
     setValid(true);
@@ -113,6 +116,13 @@ export default function Home() {
       setWidth(parseInt(e.target.value));
     }
   };
+  useEffect(() => {
+    console.log(newFish);
+  }, [newFish]);
+  useEffect(() => {
+    console.log(valid);
+  }, [newFish]);
+
   //let finalAqua=parseFloat(wantedAquarium);
   return (
     <PageContainer>
@@ -170,7 +180,8 @@ export default function Home() {
                   name="size"
                   value="small"
                   checked={newFish.size === "small"}
-                  onChange={handleChangeSize}
+                  //onChange={handleChangeSize}
+                  onChange={handleChange}
                 />
                 Small
               </label>
@@ -181,7 +192,8 @@ export default function Home() {
                   id="rb2"
                   value="big"
                   checked={newFish.size === "big"}
-                  onChange={handleChangeSize}
+                  //onChange={handleChangeSize}
+                  onChange={handleChange}
                 />
                 Big
               </label>
